@@ -23,4 +23,4 @@ class AreaForm(forms.ModelForm):
 class RestaurantTypeForm(forms.ModelForm):
     class Meta:
         model = RestaurantTypeModel
-        fields = "__all__"
+        fields = ('type_name',)

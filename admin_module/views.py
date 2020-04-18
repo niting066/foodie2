@@ -132,7 +132,8 @@ def delete_area(request):
 
 
 def open_type(request):
-    return render(request, 'admin_panel/open_type.html', {"sf": RestaurantTypeForm(), "sdata": RestaurantTypeModel.objects.all()})
+    return render(request, 'admin_panel/open_type.html', {"sf": RestaurantTypeForm(),
+                                                          "sdata": RestaurantTypeModel.objects.all()})
 
 
 def save_type(request):
@@ -148,25 +149,26 @@ def update_type(request):
     tno = request.GET.get("tno")
     tname = request.GET.get("tname")
     d1 = {"tno": tno, "tname": tname}
-    return render(request, "admin_panel/open_type.html", {"update_data": d1, "cdata": RestaurantTypeModel.objects.all()})
+    return render(request, "admin_panel/open_type.html", {"update_data": d1,
+                                                          "sdata": RestaurantTypeModel.objects.all()})
 
 
 def update_type_data(request):
     tno = request.POST.get("t1")
     tname = request.POST.get("t2")
-    AreaModel.objects.filter(no=tno).update(type_name=tname)
+    RestaurantTypeModel.objects.filter(type_no=tno).update(type_name=tname)
     return redirect('open_type')
 
 
 def delete_type(request):
     tno = request.GET.get("tno")
-    RestaurantTypeForm.objects.filter(no=tno).delete()
+    RestaurantTypeModel.objects.filter(type_no=tno).delete()
     return redirect('open_type')
 
 
 def pending_res(request):
     rs = RestaurantModel.objects.filter(restro_status='pending')
-    return render(request,"admin_panel/pending_res.html",{"data":rs})
+    return render(request, "admin_panel/pending_res.html", {"data": rs})
 
 
 def approve_res(request):
